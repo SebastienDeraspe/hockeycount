@@ -1,3 +1,5 @@
+
+
 .container {
   padding: 0 1rem;
   max-width: 600px;
@@ -6,6 +8,7 @@
 
 .container .colonne button {
   width: 100%;
+  margin:8px;
 }
 
 .colonne {
@@ -13,18 +16,38 @@
   padding: 10px 0px;
 }
 
+.wrapperData {
+  width: 100%;
+  border-bottom: 1px solid #eaeaea;
+}
+
 .resultat {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   width: 100%;
+  color:#eaeaea;
+  border-top: 1px solid #eaeaea;
 }
 
+
+
+.periodeOn {
+  background-color: #eaeaea;
+  color: #222 !important;
+  border-bottom: 1px solid #111;
+}
 .CountData {
   width: 25%;
   text-align: center;
+  padding: 10px 5px;
+  color:#eaeaea;
+  height: 100%;
 }
 
+.CountData.alignleft{
+  text-align: left !important;
+}
 
 
 .main {
@@ -143,6 +166,7 @@
   cursor: pointer;
   outline-offset: 4px;
   transition: filter 250ms;
+  width: 100%;
 }
 .shadow {
   position: absolute;

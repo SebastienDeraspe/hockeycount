@@ -1,12 +1,21 @@
 import firebase from 'firebase/app';
+import 'firebase/firestore';
 
-firebase.initializeApp({
-    apiKey: process.env.REACT_APP_API_KEY,
-    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-    databaseURL: process.env.REACT_APP_DATABASE_URL,
-    projectId: process.env.REACT_APP_PROJECT_ID,
-    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
-});
+const config = {
+    apiKey: "AIzaSyDpwZGTV9_dQbGk04KrOmW_UPe8Nt6Gy1U",
+    authDomain: "hockeycount.firebaseapp.com",
+    databaseURL: "https://hockeycount-default-rtdb.firebaseio.com",
+    projectId: "hockeycount",
+    storageBucket: "hockeycount.appspot.com",
+    messagingSenderId: "488246008787",
+    appId: "1:488246008787:web:ec5d779ed4f30ef5132d26",
+    measurementId: "G-6DNN2BPN2K"
+}
 
-console.log(firebase.getApp().options);
+if(!firebase.getApps.length) {
+    firebase.initializeApp(config);
+}
+
+const firestore = firebase.firestore();
+
+export { firestore };
