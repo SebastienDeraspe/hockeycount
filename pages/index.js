@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { getDatabase, onValue, ref } from 'firebase/database';
 import TagManager from 'react-gtm-module'
 const tagManagerArgs = {
-  gtmId: 'GTM-000000'
+  gtmId: 'G-6DNN2BPN2K'
 }
 
 TagManager.initialize(tagManagerArgs);
