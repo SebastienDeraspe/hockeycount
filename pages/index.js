@@ -111,6 +111,7 @@ const [game, setGame] = useState({
       </Head>
 {/*      Game ID : {game.gameID}<br/>
       Game Periode : {periode} */}
+                <h1>Hockey Count</h1>
       <main className={styles.main}>
           <div className={styles.colonne} >        
              <button className={styles.pushable} onClick={() => setGame({
