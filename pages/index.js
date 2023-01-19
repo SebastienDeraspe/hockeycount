@@ -4,8 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import styles from '../styles/Home.module.css'
 import { useRouter } from 'next/router';
 import { getDatabase, onValue, ref } from 'firebase/database';
-import TagManager from 'react-gtm-module'
-
+//import TagManager from 'react-gtm-module'
 
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -35,14 +34,9 @@ const app = initializeApp(firebaseConfig);
 
 
 
-export default function Home(props) {
+export default function Home(props) {  
 
-  useEffect(()=>{
-    TagManager.initialize({gtmId: 'G-6DNN2BPN2K'})
-  },[]);
-  
-
-  const router = useRouter();
+const router = useRouter();
 //  console.log(router);
 const [periode, setPeriode] = useState(1);
 const [game, setGame] = useState({
