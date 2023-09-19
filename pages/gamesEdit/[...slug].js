@@ -10,7 +10,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import TextField from '@mui/material/Input';
 
-export default function Home(props) {  
+export default function GameEditPage(props) {  
 
 function formatDate(date) {
   const d = new Date(date);
