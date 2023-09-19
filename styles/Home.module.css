@@ -4,21 +4,60 @@
   padding: 0 1rem;
   max-width: 600px;
   width: 100%;
+  margin: auto;
 }
 
 .container .colonne button {
   width: 100%;
-  margin:8px;
+  margin:8px 0px;
 }
 
 .colonne {
-  width: 48%;
-  padding: 10px 0px;
+  width: 275px;
+  padding: 10px 10px;
+  margin-bottom: 25px;
 }
+.colonne div {
+  width: 100%;
+}
+
+.colonne div::before {
+  border-color: #fff;
+  opacity: 0.75;
+}
+
+.colonne div:hover  {
+  border-color: #fff;
+  opacity: 1;
+}
+
+
+.colonne input {
+  width: 100%;
+  color: #fff;
+}
+
+.row {
+  width: 100%;
+  padding: 10px 0px;
+  color: #fff;
+}
+
+.row input {
+  color: #fff;
+  border-color: #fff;
+}
+
+.row button {
+  color: #fff;
+  border-color: #fff;
+}
+
 
 .wrapperData {
   width: 100%;
   border-bottom: 1px solid #eaeaea;
+  margin-bottom: 20px;
 }
 
 .resultat {
@@ -51,7 +90,6 @@
 
 
 .main {
-  min-height: 100vh;
   padding: 2rem 0;
   flex: 1;
   display: flex;

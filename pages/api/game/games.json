@@ -1,0 +1,71 @@
+{
+    "games" :  {
+        "gameId" : "1",
+        "team1Name" : "Mousquetaire",
+        "team2Name" : "Marinier", 
+        "periode1": {
+            "tir": 0,
+            "tirContre": 0,
+            "but": 0,
+            "butContre": 0
+        },
+        "periode2": {
+            "tir": 0,
+            "tirContre": 0,
+            "but": 0,
+            "butContre": 0
+        },
+        "periode3": {
+            "tir": 0,
+            "tirContre": 0,
+            "but": 0,
+            "butContre": 0
+        }
+    },
+    {
+        "gameId" : "2",
+        "team1Name" : "Mousquetaire",
+        "team2Name" : "Étoile", 
+        "periode1": {
+            "tir": 0,
+            "tirContre": 0,
+            "but": 0,
+            "butContre": 0
+        },
+        "periode2": {
+            "tir": 0,
+            "tirContre": 0,
+            "but": 0,
+            "butContre": 0
+        },
+        "periode3": {
+            "tir": 0,
+            "tirContre": 0,
+            "but": 0,
+            "butContre": 0
+        }
+    },
+    {
+        "gameId" : "3",
+        "team1Name" : "Mousquetaire",
+        "team2Name" : "Griffon", 
+        "periode1": {
+            "tir": 0,
+            "tirContre": 0,
+            "but": 0,
+            "butContre": 0
+        },
+        "periode2": {
+            "tir": 0,
+            "tirContre": 0,
+            "but": 0,
+            "butContre": 0
+        },
+        "periode3": {
+            "tir": 0,
+            "tirContre": 0,
+            "but": 0,
+            "butContre": 0
+        }
+    }
+}
