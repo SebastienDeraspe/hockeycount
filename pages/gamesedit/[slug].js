@@ -10,7 +10,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import TextField from '@mui/material/Input';
 
-export default function Page({props}) {
+function GamePage({props}) {
   const router = useRouter();
   const gameID = router.query.slug;
   console.log(gameID);
@@ -386,3 +386,17 @@ export default function Page({props}) {
 //       props: { gameData }, 
 //     }
 //   }
+
+export async function getServerSideProps(context) {
+  const id = context.params.slug;
+  const response = await fetch(`http://127.0.0.1:8888/api/reacthockeyapp/listGame.php?gameID=${id}`);
+  const gameData = await response.json();
+
+  return {
+    props: {
+      gameData
+    },
+  };
+}
+
+export default GamePage;
