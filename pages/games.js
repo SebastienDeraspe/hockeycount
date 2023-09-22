@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import styles from '../styles/Home.module.css'
 import { useRouter } from 'next/router';
-
+import Link from 'next/link';
 
 
 function formatDate(date) {
@@ -116,7 +116,7 @@ return (
 
           
           return(
-              <li key={game.gameID} ><a href={`/gamesedit/${game.gameID}`} >   {gameData.teamName} {gameData.opponentName} {gameData.gameDate}</a></li>
+              <li key={game.gameID} ><Link  href="/gamesedit/[gameID]" as={`/gamesedit/${game.gameID}`} ><a>{gameData.teamName} {gameData.opponentName} {gameData.gameDate}</a></Link></li>
               
           )
           setGameID(game.gameID);
