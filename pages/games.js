@@ -116,7 +116,7 @@ return (
 
           
           return(
-              <li key={game.gameID} ><a href={`/gamesEdit/${game.gameID}`} >   {gameData.teamName} {gameData.opponentName} {gameData.gameDate}</a></li>
+              <li key={game.gameID} ><a href={`/gamesedit/${game.gameID}`} >   {gameData.teamName} {gameData.opponentName} {gameData.gameDate}</a></li>
               
           )
           setGameID(game.gameID);
@@ -133,7 +133,7 @@ return (
   )
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
     const res = await fetch(`http://127.0.0.1:8888/api/reacthockeyapp/listGame.php`);
     const games = await res.json();
 

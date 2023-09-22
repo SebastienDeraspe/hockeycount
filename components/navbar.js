@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function Footer({ children }) {
+export default function Navbar({ children }) {
     return (
       <><div className='navigation'>
         <div className='titleapp' >HockeyCount</div>
