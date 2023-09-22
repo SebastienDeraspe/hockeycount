@@ -34,7 +34,7 @@ export default function Home(props) {
       </Head>
       <main className={styles.main}>
 
-        Bonjour!!! 
+        Bonjour!!!  v2
  
       </main>
     </div>

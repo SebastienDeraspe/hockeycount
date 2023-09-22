@@ -387,16 +387,16 @@ function GamePage({props}) {
 //     }
 //   }
 
-export async function getServerSideProps(context) {
-  const id = context.params.slug;
-  const response = await fetch(`http://127.0.0.1:8888/api/reacthockeyapp/listGame.php?gameID=${id}`);
-  const gameData = await response.json();
+// export async function getServerSideProps(context) {
+//   const id = context.params.slug;
+//   const response = await fetch(`http://127.0.0.1:8888/api/reacthockeyapp/listGame.php?gameID=${id}`);
+//   const gameData = await response.json();
 
-  return {
-    props: {
-      gameData
-    },
-  };
-}
+//   return {
+//     props: {
+//       gameData
+//     },
+//   };
+// }
 
 export default GamePage;
