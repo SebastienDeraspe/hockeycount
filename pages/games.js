@@ -91,9 +91,8 @@ const creatGame = () => {
 };
 
 useEffect(()=> {
-  console.log(gamesListing[0].jsonGame);
-  const gametesting = JSON.parse(gamesListing[0].jsonGame);
-  console.log(gametesting);
+
+
 },[]);
 
 
@@ -112,14 +111,17 @@ return (
         <ul>
         { gamesListing.map((game, i) => {
 
-          const gameData = JSON.parse(game.jsonGame);
-
-          
-          return(
-              <li key={game.gameID} ><Link  href="/gamesedit/[gameID]" as={`/gamesedit/${game.gameID}`} ><a>{gameData.teamName} {gameData.opponentName} {gameData.gameDate}</a></Link></li>
-              
-          )
-          setGameID(game.gameID);
+            const gameData = JSON.parse(game.jsonGame);
+            const teamName = gameData.teamName;
+            console.log(gameData.teamName);
+            const opponentName = gameData.opponentName;
+            const gameDate = gameData.gameDate;
+            
+            return(
+                <li key={game.gameID} ><Link  href={`/gamesedit/${game.gameID}`}  ><a>{teamName} {opponentName} {gameDate}</a></Link></li>                
+            );
+            setGameID(game.gameID);
+  
         })} 
         </ul> 
         <button className={styles.pushable} onClick={creatGame}>
@@ -134,8 +136,9 @@ return (
 }
 
 export async function getStaticProps(context) {
-    const res = await fetch(`http://127.0.0.1:8888/api/reacthockeyapp/listGame.php`);
+    const res = await fetch(`http://cobia.ca/api/reacthockeyapp/listGame.php`);
     const games = await res.json();
+    console.log(games);
 
     return {
       props: { games }, 
