@@ -25,7 +25,7 @@ const [dataDefault, setDataDefault] = useState({
   teamName : '',
   opponentName : '',
   gameDate : dateValue,
-  gameID: gameID,
+  gameID: 0,
   1: {
     tir: 0,
     tirContre: 0,
@@ -63,12 +63,13 @@ const creatGame = () => {
   //   Object.assign(data, additionalData);
   // }
 
-  fetch(`http://127.0.0.1:8888/api/reacthockeyapp/savegame.php`, {
+  fetch(`${process.env.NEXT_PUBLIC_API_URL}api/reacthockeyapp/newGame.php`, {
     method: 'POST',
-    mode: 'cors',
+    mode: 'no-cors',
     credentials: "include",
     headers: {
       Accept: 'application/json',
+      'X-Api-Key': '9937c590e35c46cebe95fe69b4357ff0.GSFJgGTLedVhGLeiFkRJ1YNlDuZkyCQmu_uyIMozMRprwr2xBTOC4NY6Mu6bVOWe8fVds4sywoLhMbaHXNIBJA',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(game),
@@ -136,11 +137,11 @@ return (
 }
 
 export async function getStaticProps(context) {
-    const res = await fetch(`http://cobia.ca/api/reacthockeyapp/listGame.php`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reacthockeyapp/listGame.php`);
     const games = await res.json();
     console.log(games);
 
-    return {
+    return { 
       props: { games }, 
     }
   }

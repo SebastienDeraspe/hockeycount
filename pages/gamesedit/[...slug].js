@@ -10,393 +10,381 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import TextField from '@mui/material/Input';
 
-function GamePage({props}) {
+function GamePage(props) {
   const router = useRouter();
   const gameID = router.query.slug;
   console.log(gameID);
-  return (
-    <div>
-      {gameID}
-    </div>
 
-  )
-// function formatDate(date) {
-//   const d = new Date(date);
-//   const year = d.getFullYear();
-//   const month = (d.getMonth() + 1).toString().padStart(2, '0'); // months are 0-based
-//   const day = d.getDate().toString().padStart(2, '0');
-//   return `${year}-${month}-${day}`;
-// }
+  function formatDate(date) {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = (d.getMonth() + 1).toString().padStart(2, '0'); // months are 0-based
+    const day = d.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
 
-// const defaultDateValue = formatDate(new Date());
-// const router = useRouter();
-// 
+  const defaultDateValue = formatDate(new Date());
 
-// const [dateValue, setDateValue] = useState(defaultDateValue);
-// //const [dataDefault, setDataDefault] = useState(JSON.parse(props.gameData[0].jsonGame));
+  const API_KEY = '9937c590e35c46cebe95fe69b4357ff0'+'GSFJgGTLedVhGLeiFkRJ1YNlDuZkyCQmu_uyIMozMRprwr2xBTOC4NY6Mu6bVOWe8fVds4sywoLhMbaHXNIBJA';
 
-// const [dataDefault, setDataDefault] = useState({
-//   teamName : '',
-//   opponentName : '',
-//   gameDate : dateValue,
-//   gameID: gameID,
-//   1: {
-//     tir: 0,
-//     tirContre: 0,
-//     but: 0,
-//     butContre: 0,
-//   },
-//   2: {
-//     tir: 0,
-//     tirContre: 0,
-//     but: 0,
-//     butContre: 0,
-//   },
-//   3: {
-//     tir: 0,
-//     tirContre: 0,
-//     but: 0,
-//     butContre: 0,
-//   }
-// })
+  const [dateValue, setDateValue] = useState(defaultDateValue);
+  console.log(props.gameData[0])
+  //const [dataDefault, setDataDefault] = useState(JSON.parse(props.gameData[0].jsonGame));
 
-// let localStorageData;
-// //let gameData = dataDefault;
+  const [dataDefault, setDataDefault] = useState({
+    teamName : '',
+    opponentName : '',
+    gameDate : dateValue,
+    gameID: gameID,
+    1: {
+      tir: 0,
+      tirContre: 0,
+      but: 0,
+      butContre: 0,
+    },
+    2: {
+      tir: 0,
+      tirContre: 0,
+      but: 0,
+      butContre: 0,
+    },
+    3: {
+      tir: 0,
+      tirContre: 0,
+      but: 0,
+      butContre: 0,
+    }
+  })
 
-// const [message, setMessage] = useState();
-// const [status, setStatus] = useState();
-// const [periode, setPeriode] = useState(1);
-// //const [game, setGame] = useState(dataDefault);
-// const [game, setGame] = useState(JSON.parse(props.gameData[0].jsonGame));
+  let localStorageData;
+  //let gameData = dataDefault;
 
-//   function CountData(action) {
-//     action.preventDefault();
-//     const  currentTire = tirInputRef.current.value;
-//   };
+  const [message, setMessage] = useState();
+  const [status, setStatus] = useState();
+  const [periode, setPeriode] = useState(1);
+  //const [game, setGame] = useState(dataDefault);
+  //console.log(props.gameData);
+  const [game, setGame] = useState(JSON.parse(props.gameData[0].jsonGame));
+
+    function CountData(action) {
+      action.preventDefault();
+      const  currentTire = tirInputRef.current.value;
+    };
 
 
-// const sendData = () => {
+  const sendData = () => {
 
-//     setStatus('loading');
-//     setMessage('');
+      setStatus('loading');
+      setMessage('');
 
-//     const finalFormEndpoint = 'http://localhost:8888/api/reacthockeyapp/savegame.php';
-//     // const data = Array.from(e.target.elements)
-//     //   .filter((input) => input.name)
-//     //   .reduce((obj, input) => Object.assign(obj, { [input.name]: input.value }), {});
+      const finalFormEndpoint = 'http://cobia.ca/api/reacthockeyapp/savegame.php';
+      // const data = Array.from(e.target.elements)
+      //   .filter((input) => input.name)
+      //   .reduce((obj, input) => Object.assign(obj, { [input.name]: input.value }), {});
 
-//     // if (additionalData) {
-//     //   Object.assign(data, additionalData);
-//     // }
+      // if (additionalData) {
+      //   Object.assign(data, additionalData);
+      // }
 
-//     fetch(`http://127.0.0.1:8888/api/reacthockeyapp/savegame.php?gameID=${gameID}`, {
-//       method: 'POST',
-//       mode: 'cors',
-//       credentials: "include",
-//       headers: {
-//         Accept: 'application/json',
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(game),
-//     })
-//       .then((response) => {
-//         if (response.status !== 200) {
-//           throw new Error(response.statusText);
-//         }
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reacthockeyapp/savegame.php?gameID=${gameID}`, {
+        method: 'POST',
+        mode: 'no-cors',
+        credentials: "include",
+        headers: {
 
-//         return response.json();
-//       })
-//       .then(() => {
-//         setMessage("We'll be in touch soon.");
-//         setStatus('success');
-//       })
-//       .catch((err) => {
-//         setMessage(err.toString());
-//         setStatus('error');
-//       });
-//   };
+          Accept: 'application/json',
+          'X-Api-Key' : '9937c590e35c46cebe95fe69b4357ff0.GSFJgGTLedVhGLeiFkRJ1YNlDuZkyCQmu_uyIMozMRprwr2xBTOC4NY6Mu6bVOWe8fVds4sywoLhMbaHXNIBJA',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(game),
+      })
+        .then((response) => {
+          if (response.status !== 200) {
+            throw new Error(response.statusText);
+          }
 
+          return response.json();
+        })
+        .then(() => {
+          setMessage("We'll be in touch soon.");
+          setStatus('success');
+        })
+        .catch((err) => {
+          setMessage(err.toString());
+          setStatus('error');
+        });
+    };
 
 
 
-// function resetLocal() {
-//   //setGame(dataDefault);
-//   localStorage.setItem('game', JSON.stringify(dataDefault))
-// }  
 
-// function updateLocal() {
-//   console.log(game);
-//   localStorage.setItem('game', JSON.stringify(game));
-//   //gameData = JSON.parse(localStorage.getItem('game'));
-// }
+  function resetLocal() {
+    setGame(dataDefault);
+    localStorage.setItem('game', JSON.stringify(dataDefault))
+  }  
 
-// const dateChange = (date) => {
-//   setDateValue(date);
-//   setGame({...game, gameDate: date});
-// }
+  function updateLocal() {
+    console.log(game);
+    localStorage.setItem('game', JSON.stringify(game));
+    //gameData = JSON.parse(localStorage.getItem('game'));
+  }
 
-
-//  let firstPeriode = null;
-//  let secondPeriode = null;
-//  let thirtPeriode = null;
-
-//  switch (periode) {
-//   case 1:
-//     firstPeriode = styles.periodeOn;
-//     break;
-//   case 2:
-//     secondPeriode = styles.periodeOn;
-//     break;
-//   case 3:
-//     thirtPeriode = styles.periodeOn;
-//     break;
-// }
+  const dateChange = (date) => {
+    setDateValue(date);
+    setGame({...game, gameDate: date});
+  }
 
 
+  let firstPeriode = null;
+  let secondPeriode = null;
+  let thirtPeriode = null;
 
-//   useEffect(()=> {
-//     const gameDataLocal = localStorage.getItem('game'); 
-//   }, []);
+  switch (periode) {
+    case 1:
+      firstPeriode = styles.periodeOn;
+      break;
+    case 2:
+      secondPeriode = styles.periodeOn;
+      break;
+    case 3:
+      thirtPeriode = styles.periodeOn;
+      break;
+  }
 
 
-//   useEffect(()=> {
-//     //const analytics = getAnalytics(app);
-//     //logEvent(analytics, 'notification_received');
-//     localStorage.setItem('game', JSON.stringify(game)); 
 
-//   }, [game]);
+  useEffect(()=> {
+    const gameDataLocal = localStorage.getItem('game'); 
+  }, []);
+
+
+  useEffect(()=> {
+    //const analytics = getAnalytics(app);
+    //logEvent(analytics, 'notification_received');
+    localStorage.setItem('game', JSON.stringify(game)); 
+  }, [game]);
   
 
-//   return (
-//     <div className={styles.container}>
-//       <Head>
-//         <title>Hockey Count</title>
-//         <meta name="description" content="Generated by Sebastien Deraspe" />
-//         <link rel="icon" href="/favicon.ico" />
-//       </Head>
-//       {/*Game ID : {game.gameID}<br/>
-//       Game Periode : {periode} */}
-//        <main className={styles.main}>
-//        <div className={styles.row} >        
-//       <DatePicker
-//         value={dayjs(game.gameDate)}
-//         defaultValue={dayjs(dateValue)}
-//         views={['year', 'month', 'day']}
-//         format='YYYY-MM-DD'
-//         //onChange={() => setGame({...game, gameDate : event.target.value})}
-//         onChange={(newDateValue) => {dateChange(formatDate(newDateValue)); updateLocal(); }}
-//       />
-//       </div>
-//       <div className={styles.colonne} > 
-//       <TextField value={game.teamName} name='nom_equipe' placeholder="Nom de votre équipe" required variant="outlined" onChange={() => {  setGame({...game, teamName : event.target.value});  updateLocal(); }}  />
-//       </div>
-//       <div className={styles.colonne} >
-//       <TextField  value={game.opponentName} name='nom_adversaire' placeholder="Nom de votre adversaire" required variant="outlined" onChange={() => {setGame({...game, opponentName : event.target.value}); updateLocal(); }} />
-//       </div>
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>Hockey Count</title>
+        <meta name="description" content="Generated by Sebastien Deraspe" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      
+       <main className={styles.main}>
+       <div className={styles.row} >        
+      <DatePicker
+        value={dayjs(game.gameDate)}
+        defaultValue={dayjs(dateValue)}
+        views={['year', 'month', 'day']}
+        format='YYYY-MM-DD'
+        //onChange={() => setGame({...game, gameDate : event.target.value})}
+        onChange={(newDateValue) => {dateChange(formatDate(newDateValue)); updateLocal(); }}
+      />
+      </div>
+      <div className={styles.colonne} > 
+      <TextField value={game.teamName} name='nom_equipe' placeholder="Nom de votre équipe" required variant="outlined" onChange={() => {  setGame({...game, teamName : event.target.value});  updateLocal(); }}  />
+      </div>
+      <div className={styles.colonne} >
+      <TextField  value={game.opponentName} name='nom_adversaire' placeholder="Nom de votre adversaire" required variant="outlined" onChange={() => {setGame({...game, opponentName : event.target.value}); updateLocal(); }} />
+      </div>
 
 
-//       <div className={styles.colonne} >        
-//              <button className={styles.pushable} onClick={() => { setGame({
-//                 ...game,
-//                 [periode]: {
-//                   ...game[periode],
-//                   tir: game[periode].tir + 1
-//                 }
-//             }); updateLocal(); }
-//             }>
-//                 <span className={styles.shadow}></span>
-//                 <span className={styles.edge} ></span>
-//                 <span className={styles.front} >+ Shot</span>
-//               </button>
-//               <button className={styles.pushable} disabled={ game[periode].tir == 0 ? true : false } onClick={() => { setGame({
-//                 ...game,
-//                 [periode]: {
-//                   ...game[periode],
-//                   tir: game[periode].tir - 1
-//                 }
-//             }) ; updateLocal(); } 
-//             }>
-//                 <span className={styles.shadow}></span>
-//                 <span className={styles.edge} ></span>
-//                 <span className={styles.front} >- Shot</span>
-//               </button>                         
-//           </div>
-//           <div className={styles.colonne} >        
-//           <button className={styles.pushable}  onClick={() => { setGame({
-//                 ...game,
-//                 [periode]: {
-//                   ...game[periode],
-//                   tirContre: game[periode].tirContre + 1
-//                 }
-//             }); updateLocal(); }}>
-//                 <span className={styles.shadow}></span>
-//                 <span className={styles.edge} ></span>
-//                 <span className={styles.front} >+ Shot against</span>              
-//                </button>
-//             <button className={styles.pushable} disabled={ game[periode].tirContre == 0 ? true : false  }  onClick={() => {setGame({
-//                 ...game,
-//                 [periode]: {
-//                   ...game[periode],
-//                   tirContre: game[periode].tirContre - 1
-//                 }
-//             }); updateLocal(); }}>
-//                 <span className={styles.shadow}></span>
-//                 <span className={styles.edge} ></span>
-//                 <span className={styles.front} >- Shot against</span>              
-//                </button>      
-//           </div>
-//             <div className={styles.colonne} >        
-//             <button className={styles.pushable} onClick={() => {setGame({
-//                 ...game,
-//                 [periode]: {
-//                   ...game[periode],
-//                   but: game[periode].but + 1
-//                 }
-//             }); ; updateLocal(); }}>
-//                 <span className={styles.shadow}></span>
-//                 <span className={styles.edge} ></span>
-//                 <span className={styles.front} >+ Goal</span>
-//               </button> 
-//               <button className={styles.pushable} disabled={ game[periode].but == 0 ? true : false  } onClick={() => { setGame({
-//                 ...game,
-//                 [periode]: {
-//                   ...game[periode],
-//                   but: game[periode].but - 1
-//                 }
-//             }); updateLocal(); }}>
-//                 <span className={styles.shadow}></span>
-//                 <span className={styles.edge} ></span>
-//                 <span className={styles.front} >- Goal</span>
-//               </button> 
+      <div className={styles.colonne} >        
+             <button className={styles.pushable} onClick={() => { setGame({
+                ...game,
+                [periode]: {
+                  ...game[periode],
+                  tir: game[periode].tir + 1
+                }
+            }); updateLocal(); }
+            }>
+                <span className={styles.shadow}></span>
+                <span className={styles.edge} ></span>
+                <span className={styles.front} >+ Shot</span>
+              </button>
+              <button className={styles.pushable} disabled={ game[periode].tir == 0 ? true : false } onClick={() => { setGame({
+                ...game,
+                [periode]: {
+                  ...game[periode],
+                  tir: game[periode].tir - 1
+                }
+            }) ; updateLocal(); } 
+            }>
+                <span className={styles.shadow}></span>
+                <span className={styles.edge} ></span>
+                <span className={styles.front} >- Shot</span>
+              </button>                         
+          </div>
+          <div className={styles.colonne} >        
+          <button className={styles.pushable}  onClick={() => { setGame({
+                ...game,
+                [periode]: {
+                  ...game[periode],
+                  tirContre: game[periode].tirContre + 1
+                }
+            }); updateLocal(); }}>
+                <span className={styles.shadow}></span>
+                <span className={styles.edge} ></span>
+                <span className={styles.front} >+ Shot against</span>              
+               </button>
+            <button className={styles.pushable} disabled={ game[periode].tirContre == 0 ? true : false  }  onClick={() => {setGame({
+                ...game,
+                [periode]: {
+                  ...game[periode],
+                  tirContre: game[periode].tirContre - 1
+                }
+            }); updateLocal(); }}>
+                <span className={styles.shadow}></span>
+                <span className={styles.edge} ></span>
+                <span className={styles.front} >- Shot against</span>              
+               </button>      
+          </div>
+            <div className={styles.colonne} >        
+            <button className={styles.pushable} onClick={() => {setGame({
+                ...game,
+                [periode]: {
+                  ...game[periode],
+                  but: game[periode].but + 1
+                }
+            }); ; updateLocal(); }}>
+                <span className={styles.shadow}></span>
+                <span className={styles.edge} ></span>
+                <span className={styles.front} >+ Goal</span>
+              </button> 
+              <button className={styles.pushable} disabled={ game[periode].but == 0 ? true : false  } onClick={() => { setGame({
+                ...game,
+                [periode]: {
+                  ...game[periode],
+                  but: game[periode].but - 1
+                }
+            }); updateLocal(); }}>
+                <span className={styles.shadow}></span>
+                <span className={styles.edge} ></span>
+                <span className={styles.front} >- Goal</span>
+              </button> 
 
-//           </div>
-//           <div className={styles.colonne} >        
-//           <button className={styles.pushable} onClick={() => { setGame({
-//                 ...game,
-//                 [periode]: {
-//                   ...game[periode],
-//                   butContre: game[periode].butContre + 1
-//                 }
-//             }); updateLocal(); }}>
-//                 <span className={styles.shadow}></span>
-//                 <span className={styles.edge} ></span>
-//                 <span className={styles.front} >+ Goal against</span>
-//               </button>
-//               <button className={styles.pushable} disabled={ game[periode].butContre == 0 ? true : false  } onClick={() => { setGame({
-//                 ...game,
-//                 [periode]: {
-//                   ...game[periode],
-//                   butContre: game[periode].butContre - 1
-//                 }
-//             }); updateLocal(); }}>
-//                 <span className={styles.shadow}></span>
-//                 <span className={styles.edge} ></span>
-//                 <span className={styles.front} >- Goal against</span>
-//               </button>    
-//           </div>
-//           <div className={styles.wrapperData}>
-//           <div className={styles.resultat}>
-//             <div className={`${styles.CountData} ${styles.alignleft}`}></div>  
-//             <div className={`${styles.CountData} ${firstPeriode}`}>Period 1</div>  
-//             <div className={`${styles.CountData} ${secondPeriode}`}>Period 2</div>  
-//             <div className={`${styles.CountData} ${thirtPeriode}`}>Period 3</div>                        
-//             <div className={`${styles.CountData}`}>total</div>                        
-//           </div>  
+          </div>
+          <div className={styles.colonne} >        
+          <button className={styles.pushable} onClick={() => { setGame({
+                ...game,
+                [periode]: {
+                  ...game[periode],
+                  butContre: game[periode].butContre + 1
+                }
+            }); updateLocal(); }}>
+                <span className={styles.shadow}></span>
+                <span className={styles.edge} ></span>
+                <span className={styles.front} >+ Goal against</span>
+              </button>
+              <button className={styles.pushable} disabled={ game[periode].butContre == 0 ? true : false  } onClick={() => { setGame({
+                ...game,
+                [periode]: {
+                  ...game[periode],
+                  butContre: game[periode].butContre - 1
+                }
+            }); updateLocal(); }}>
+                <span className={styles.shadow}></span>
+                <span className={styles.edge} ></span>
+                <span className={styles.front} >- Goal against</span>
+              </button>    
+          </div>
+          <div className={styles.wrapperData}>
+          <div className={styles.resultat}>
+            <div className={`${styles.CountData} ${styles.alignleft}`}></div>  
+            <div className={`${styles.CountData} ${firstPeriode}`}>Period 1</div>  
+            <div className={`${styles.CountData} ${secondPeriode}`}>Period 2</div>  
+            <div className={`${styles.CountData} ${thirtPeriode}`}>Period 3</div>                        
+            <div className={`${styles.CountData}`}>total</div>                        
+          </div>  
 
-//           <div className={styles.resultat}>
-//             <div className={`${styles.CountData} ${styles.alignleft}`}>Shot</div>
-//             <div className={`${styles.CountData} ${firstPeriode}`}>{game[1].tir}</div>
-//             <div className={`${styles.CountData} ${secondPeriode}`}>{game[2].tir}</div>
-//             <div className={`${styles.CountData} ${thirtPeriode}`}>{game[3].tir}</div>
-//             <div className={`${styles.CountData}`}>{game[1].tir + game[2].tir + game[3].tir }</div>
-//           </div>
-//           <div className={styles.resultat}>
-//             <div className={`${styles.CountData} ${styles.alignleft}`}>Shot against</div>
-//             <div className={`${styles.CountData} ${firstPeriode}`}>{game[1].tirContre}</div>
-//             <div className={`${styles.CountData} ${secondPeriode}`}>{game[2].tirContre}</div>
-//             <div className={`${styles.CountData} ${thirtPeriode}`}>{game[3].tirContre}</div>
-//             <div className={`${styles.CountData}`}>{game[1].tirContre + game[2].tirContre + game[3].tirContre }</div>
-//           </div>
+          <div className={styles.resultat}>
+            <div className={`${styles.CountData} ${styles.alignleft}`}>Shot</div>
+            <div className={`${styles.CountData} ${firstPeriode}`}>{game[1].tir}</div>
+            <div className={`${styles.CountData} ${secondPeriode}`}>{game[2].tir}</div>
+            <div className={`${styles.CountData} ${thirtPeriode}`}>{game[3].tir}</div>
+            <div className={`${styles.CountData}`}>{game[1].tir + game[2].tir + game[3].tir }</div>
+          </div>
+          <div className={styles.resultat}>
+            <div className={`${styles.CountData} ${styles.alignleft}`}>Shot against</div>
+            <div className={`${styles.CountData} ${firstPeriode}`}>{game[1].tirContre}</div>
+            <div className={`${styles.CountData} ${secondPeriode}`}>{game[2].tirContre}</div>
+            <div className={`${styles.CountData} ${thirtPeriode}`}>{game[3].tirContre}</div>
+            <div className={`${styles.CountData}`}>{game[1].tirContre + game[2].tirContre + game[3].tirContre }</div>
+          </div>
 
-//           <div className={styles.resultat}>
-//             <div className={`${styles.CountData} ${styles.alignleft}`}>Goal</div>
-//             <div className={`${styles.CountData} ${firstPeriode}`}>{game[1].but}</div>
-//             <div className={`${styles.CountData} ${secondPeriode}`}>{game[2].but}</div>
-//             <div className={`${styles.CountData} ${thirtPeriode}`}>{game[3].but}</div>
-//             <div className={`${styles.CountData}`}>{game[1].but + game[2].but + game[3].but }</div>
-//           </div>
-//           <div className={styles.resultat}>
-//             <div className={`${styles.CountData} ${styles.alignleft}`}>Goal against</div>
-//             <div className={`${styles.CountData} ${firstPeriode}`}>{game[1].butContre}</div>
-//             <div className={`${styles.CountData} ${secondPeriode}`}>{game[2].butContre}</div>
-//             <div className={`${styles.CountData} ${thirtPeriode}`}>{game[3].butContre}</div>
-//             <div className={`${styles.CountData}`}>{game[1].butContre + game[2].butContre + game[3].butContre }</div>
-//           </div>
-//           </div>  
-//           <div className={styles.resultat}>
-//           <div className={styles.CountData}></div>
-//             <div className={styles.CountData}>
-//                 <button className={styles.pushable} onClick={() => setPeriode(1)}>
-//                   <span className={styles.shadow}></span>
-//                   <span className={styles.edge} ></span>
-//                   <span className={styles.front} >1</span>
-//                 </button>
-//             </div>
-//             <div className={styles.CountData}>
-//             <button className={styles.pushable} onClick={() => setPeriode(2)}>
-//                   <span className={styles.shadow}></span>
-//                   <span className={styles.edge} ></span>
-//                   <span className={styles.front} >2</span>
-//                 </button>
-//             </div>
-//             <div className={styles.CountData}>
-//               <button className={styles.pushable} onClick={() => setPeriode(3)}>
-//                   <span className={styles.shadow}></span>
-//                   <span className={styles.edge} ></span>
-//                   <span className={styles.front} >3</span>
-//                 </button>
-//             </div>
-//             <div className={styles.CountData}></div>
-//           </div>
+          <div className={styles.resultat}>
+            <div className={`${styles.CountData} ${styles.alignleft}`}>Goal</div>
+            <div className={`${styles.CountData} ${firstPeriode}`}>{game[1].but}</div>
+            <div className={`${styles.CountData} ${secondPeriode}`}>{game[2].but}</div>
+            <div className={`${styles.CountData} ${thirtPeriode}`}>{game[3].but}</div>
+            <div className={`${styles.CountData}`}>{game[1].but + game[2].but + game[3].but }</div>
+          </div>
+          <div className={styles.resultat}>
+            <div className={`${styles.CountData} ${styles.alignleft}`}>Goal against</div>
+            <div className={`${styles.CountData} ${firstPeriode}`}>{game[1].butContre}</div>
+            <div className={`${styles.CountData} ${secondPeriode}`}>{game[2].butContre}</div>
+            <div className={`${styles.CountData} ${thirtPeriode}`}>{game[3].butContre}</div>
+            <div className={`${styles.CountData}`}>{game[1].butContre + game[2].butContre + game[3].butContre }</div>
+          </div>
+          </div>  
+          <div className={styles.resultat}>
+          <div className={styles.CountData}></div>
+            <div className={styles.CountData}>
+                <button className={styles.pushable} onClick={() => setPeriode(1)}>
+                  <span className={styles.shadow}></span>
+                  <span className={styles.edge} ></span>
+                  <span className={styles.front} >1</span>
+                </button>
+            </div>
+            <div className={styles.CountData}>
+            <button className={styles.pushable} onClick={() => setPeriode(2)}>
+                  <span className={styles.shadow}></span>
+                  <span className={styles.edge} ></span>
+                  <span className={styles.front} >2</span>
+                </button>
+            </div>
+            <div className={styles.CountData}>
+              <button className={styles.pushable} onClick={() => setPeriode(3)}>
+                  <span className={styles.shadow}></span>
+                  <span className={styles.edge} ></span>
+                  <span className={styles.front} >3</span>
+                </button>
+            </div>
+            <div className={styles.CountData}></div>
+          </div>
 
-//           <div className={styles.resultat}>  
-//           <button className={styles.pushable} onClick={sendData}>
-//                   <span className={styles.shadow}></span>
-//                   <span className={styles.edge} ></span>
-//                   <span className={styles.front} >Save Data</span>
-//           </button>
-//           <button className={styles.pushable} onClick={resetLocal}>
-//                   <span className={styles.shadow}></span>
-//                   <span className={styles.edge} ></span>
-//                   <span className={styles.front} >Reset Data</span>
-//           </button>
-//           </div>
+          <div className={styles.resultat}>  
+          <button className={styles.pushable} onClick={sendData}>
+                  <span className={styles.shadow}></span>
+                  <span className={styles.edge} ></span>
+                  <span className={styles.front} >Save Data</span>
+          </button>
+          <button className={styles.pushable} onClick={resetLocal}>
+                  <span className={styles.shadow}></span>
+                  <span className={styles.edge} ></span>
+                  <span className={styles.front} >Reset Data</span>
+          </button>
+          </div>
 
 
-//       </main> 
-//     </div>
-//   )
+      </main>  
+    </div>
+  )
 }
 
-// export async function getServerSideProps({context}) {
-//     const id = context.params.slug;
-//     const res = await fetch(`http://127.0.0.1:8888/api/reacthockeyapp/listGame.php?gameID=${id}`);
-//     const gameData = await res.json();
-//     return {
-//       props: { gameData }, 
-//     }
-//   }
-
-// export async function getServerSideProps(context) {
-//   const id = context.params.slug;
-//   const response = await fetch(`http://127.0.0.1:8888/api/reacthockeyapp/listGame.php?gameID=${id}`);
-//   const gameData = await response.json();
-
-//   return {
-//     props: {
-//       gameData
-//     },
-//   };
-// }
+export async function getServerSideProps(context) {
+  const id = context.params.slug;
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reacthockeyapp/listGame.php?gameID=${id}`);
+  const gameData = await response.json();
+  console.log(gameData);
+  return {
+    props: {
+      gameData
+    },
+  };
+}
 
 export default GamePage;
